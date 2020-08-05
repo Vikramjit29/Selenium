@@ -1,0 +1,60 @@
+using OpenQA.Selenium;
+using OpenQA.Selenium.Support.PageObjects;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using OpenQA.Selenium.Interactions;
+
+namespace Xero.Bank
+{
+	public class ANZBankDetails
+    {
+        public ANZBankDetails()
+        {
+            PageFactory.InitElements(Driver.driver, this);
+
+        }
+
+  	//Enter BankName
+        [FindsBy(How = How.XPath, Using = "//*[@id='BankName']")]
+        private IWebElement BankName { get; set; }
+
+ 	//Enter BankCode
+        [FindsBy(How = How.XPath, Using = "//*[@id='BankCode']")]
+        private IWebElement BankCode { get; set; }
+
+ 	//Enter BranchCode
+        [FindsBy(How = How.XPath, Using = "//*[@id='BranchCode']")]
+        private IWebElement BranchCode { get; set; }
+
+  	//Enter AccountNo
+        [FindsBy(How = How.XPath, Using = "//*[@id='AccountNo']")]
+        private IWebElement AccountNo { get; set; }
+
+  	//Enter Suffix
+        [FindsBy(How = How.XPath, Using = "//*[@id='Suffix']")]
+        private IWebElement Suffix { get; set; }
+
+ 	//Click on Save Button
+        [FindsBy(How = How.XPath, Using = "//*[@id='Save']")]
+        private IWebElement ClickSave { get; set; }
+
+	internal void ANZBankDetails()
+	{
+
+		BankName.SendKeys(ExcelLib.ReadData(2, "BankName"));
+		BankCode.SendKeys(ExcelLib.ReadData(2, "BankCode"));
+		BranchCode.SendKeys(ExcelLib.ReadData(2, "BranchCode"));
+		AccountNo.SendKeys(ExcelLib.ReadData(2, "AccountNo));
+		Suffix.SendKeys(ExcelLib.ReadData(2, "Suffix"));
+		ClickSave.Click();
+	}
+    }
+}
+
+
+        
+
