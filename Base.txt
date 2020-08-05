@@ -1,0 +1,75 @@
+using NUnit.Framework;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.IE;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+ 
+namespace NUnit_Xero
+{
+    public class Browser_ops
+    {
+        IWebDriver webDriver;
+        public void Init_Browser()
+        {
+           switch (Browser)
+            {
+                case 1:
+                    webDriver = new FirefoxDriver();
+                    break;
+                case 2:
+                    webDriver = new ChromeDriver();
+                    webDriver.Manage().Window.Maximize();
+                    break;
+
+            } 
+        }
+        public string Title
+        {
+            get { return webDriver.Title; }
+        }
+        public void Goto(string url)
+        {
+            webDriver.Url = url;
+        }
+        public void Close()
+        {
+            webDriver.Quit();
+        }
+        public IWebDriver getDriver
+        {
+            get { return webDriver; }
+        }
+    }
+    class NUnit_Xero
+    {
+        Browser_ops brow = new Browser_ops();
+        String test_url = "https://www.xero.co.nz";
+        IWebDriver driver;
+ 
+        [SetUp]
+        public void start_Browser()
+        {
+            brow.Init_Browser();
+        }
+ 
+        [Test]
+        public void ANZBankDetailsTest()
+        {
+                test = extent.StartTest("ANZBankDetails");                
+                ANZBankDetails anz = new ANZBankDetails();
+                anz.ANZBankDetails();
+
+     	   }
+ 
+        [TearDown]
+        public void close_Browser()
+        {
+            brow.Close();
+        }
+    }
+}
